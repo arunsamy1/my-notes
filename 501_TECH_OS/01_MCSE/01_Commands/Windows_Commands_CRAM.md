@@ -1,4 +1,3 @@
-
 **_RedHat Enterprise linux  – RHCE preparation kit_**
 
 **_Linux Principles_**
@@ -19,7 +18,7 @@ Linux systems have many powerful utilities designed to create and manipulate fil
 
 Text is a universal interface, and many Linux utilities exist to manipulate text. Storing configuration in text allows an administrator to move a configuration from one machine to another easily. There are several revision control applications that enable an administrator to track which change was made on a particular day, and provide the ability to roll back the system configuration to a particular date and time.
 
-**_3._** **Small, single purpose programs_:_**
+**_3._** **Small, single purpose programs:**
 
 Linux provides many small utilities that perform a single task very well. When new functionality is required, the general philosophy is to create a separate program – rather than to extend an existing utility with new features.
 
