@@ -1,0 +1,13 @@
+How to install packages in Solaris server?
+As a root
+pkgadd -d <<package_Name>>.pkg all
+
+
+What is the command to check the IP address in solaris
+ifconfig -a
+
+What is the command to check the route table in solaris 10.
+netstat -r
+
+What is the command to check the traceroute in solaris 10
+traceroute 8.8.8.8
