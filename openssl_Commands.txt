@@ -1,0 +1,91 @@
+﻿How to view which openssl command is being used?
+which openssl
+
+
+How to get the version of openssl?
+/usr/sfw/bin/openssl version
+/usr/bin/openssl version
+/usr/bin/openssl1 version
+
+
+How to view the version of openssl with all details?
+openssl version
+openssl version -a
+
+
+How to test the protocol presence in the server/port using openssl command? (SSLv2, SSLv3, TLS1.0, TLS1.1, TLS1.2)
+openssl s_client -connect 10.174.49.136:443 -ssl2                SSLv3 presence.
+openssl s_client -connect 10.174.49.136:443 -ssl3                SSLv3 presence.
+openssl s_client -connect 10.174.49.136:443 -tls1                TLS1 presence.
+openssl s_client -connect 10.174.49.136:443 -tls1_1                TLS1.1 presence.
+openssl s_client -connect 10.174.49.136:443 -tls1_2                TLS1.2 presence.
+
+
+How to test the presence of a cipher in the server/port?
+openssl s_client -connect 10.174.49.136:443 -cipher EXPORT        EXPORT cipher presence.
+openssl s_client -connect 10.174.49.136:443 -cipher EXP                same as above.
+
+
+How to test for session renegotiation using openssl?
+openssl s_client -connect 10.174.49.136:443 -reconnect
+
+
+How to use a local certificate and connect to a URL using openssl? ( for testing the local cert)
+Openssl s_client -connect <10.174.49.136:443> -certname test.one.com.pem
+
+
+
+
+How to view the certificate on a destination URL using openssl command?
+openssl s_client -connect a1cvap1024:8005 -showcerts
+or
+openssl s_client -host google.com -port 443 -prexit -showcerts
+
+
+openssl s_client -showcerts -verify 5 -connect stackexchange.com:443 < /dev/null
+How to verify a downloaded certificate chain?
+openssl verify -show_chain -untrusted dc-sha2.crt se.crt
+----------XXXX--------------XXXX
+How to dump all certs in the chain to the current dir as cert${chain_number}.pem:
+openssl s_client -showcerts -verify 5 -connect your_host:443 < /dev/null | awk '/BEGIN/,/END/{ if(/BEGIN/){a++}; out="cert"a".pem"; print >out}'
+How to verify a downloaded certificate chain?
+openssl verify -show_chain -untrusted cert1.pem cert2.pem
+If you want to understand which chain is provided with your certificate you should run?
+openssl s_client -showcerts -partial_chain -connect YOUR_ENDPOINT:443 < /dev/null |less
+----------XXXX--------------XXXX
+How to list all the ciphers used by a server:ip? 
+Use the below script:
+--------------------
+#!/bin/bash
+for v in ssl2 ssl3 tls1 tls1_1 tls1_2; do
+ for c in $(openssl ciphers 'ALL:eNULL' | tr ':' ' '); do
+ openssl s_client -connect www.yahoo.com:443 -cipher $c -$v < /dev/null > /dev/null 2>&1 && echo -e "$v:\t$c"
+ done
+done
+-------------------------
+
+
+Another script
+https://superuser.com/questions/109213/how-do-i-list-the-ssl-tls-cipher-suites-a-particular-website-offers
+
+
+
+
+
+
+************************************************************************************************************************************
+
+
+openssl genrsa -out n3dvwb953_v2.key 1024
+
+
+openssl req -new -subj '/C=US/ST=NE/L=Omaha/CN=n3dvwb953.1dc.com'  -key n3dvwb953_v2.key -out n3dvwb953_v2.csr
+openssl x509 -req  -days 7300 -in n3dvwb953_v2.csr  -signkey n3dvwb953_v2.key -out n3dvwb953_v2.crt
+
+
+
+
+openssl rsa -in n9pvap031_v2.key -out n9pvap031_v2_new.key
+openssl rsa -in new_n9pvap033_v2.key -out new_n9pvap033_v2_withoutpass.key
+openssl rsa -in new_n9pvap034_v2.key -out new_n9pvap034_v2_withoutpass.key
+openssl rsa -in new_n9pvap030_v2.key -out new_n9pvap030_v2.key_withoutpass.key

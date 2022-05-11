@@ -1,0 +1,67 @@
+﻿keytool -printcert -file leaf.cer
+
+
+keytool -list -v -keystore ssl.truststore -storepass changeit
+keytool -list -v -keystore trust.keystore -storepass
+keytool -list -v -keystore cacerts -storepass  changeit
+
+
+keytool  -delete -alias  x1dpir999-int1 -keystore cacerts -storepass changeit
+
+
+keytool -import -file default.cer -alias "default" -keystore trust.keystore -storepass P4ssw0rd
+keytool  -import -file g5-root.cer -keystore trust.keystore -alias g5-root -storepass changeit
+keytool  -import -file g4-intermediate.cer -keystore trust.keystore -alias g4-intermediate -storepass changeit
+
+
+keytool -export -keystore ssl.keystore -alias "n3dvap024.1dc.com" -file n3dvap024.1dc.com.cer
+
+
+
+
+keytool -importcert -keystore ssl.truststore -storepass changeit -file r3dvwb1045.txt -alias r3dvwb1045
+keytool -importcert -keystore trust.keystore -storepass P4ssw0rd -file n3dvap844.cer  -alias n3dvap844 
+keytool -importcert -keystore ssl.keystore -storepass P4ssw0rd -file r3dvwb1045.1dc.com.cer -alias default
+
+
+cmd to delete the newly created cert default cert
+keytool -delete -noprompt -alias default  -keystore ssl.keystore -storepass <password>
+keytool  -delete -alias  x1dpir999-int1 -keystore cacerts -storepass changeit
+keytool  -delete -alias  r3dvwb1045 -keystore ssl.truststore -storepass changeit
+
+
+keytool -export -keystore ssl.keystore -alias "n3dvap024.1dc.com" -file n3dvap024.1dc.com.cer
+keytool -export -keystore ssl.keystore -alias "default" -file default.cer
+
+
+cmd to create ssl.keystore with default cert
+keytool -genkey -keystore ssl.keystore -storepass <password> -keypass <password> -alias "default" -keyalg RSA -keysize 2048 -validity 1825 -dname "cn=servername.1dc.com" -sigalg SHA256withRSA
+keytool -genkey -keystore ssl.keystore -storepass P4ssw0rd -keypass P4ssw0rd -alias "n3dvap024.1dc.com" -keyalg RSA -keysize 2048 -validity 7300 -dname "cn=n3dvap024.1dc.com" -sigalg SHA25withRSA
+keytool -genkey -keystore ssl.keystore -storepass P4ssw0rd -keypass P4ssw0rd -alias "default" -keyalg RSA -keysize 2048 -validity 7300 -dname "cn=r3dvwb1045.1dc.com" -sigalg SHA256withRSA
+
+
+
+
+keytool  -inputcert r3dvwb1045.txt -out r3dvwb1045.der
+
+
+keytool -certreq -keystore test.jks -storepass password -alias default -file r3dvwb1045.1dc.com.csr
+keytool -certreq -keystore test.jks -storepass password -alias default -file r3dvwb1045.1dc.com.csr
+
+
+keytool -genkeypair -alias ca -keystore test.jks -dname "CN=CA" -storepass password -keypass password -ext bc=ca:true
+keytool -genkeypair -alias default -keystore test.jks -dname "CN=r3dvwb1045.1dc.com" -storepass password -keypass password
+
+
+keytool -gencert -keystore test.jks -storepass password -alias ca -infile r3dvwb1045.1dc.com.csr -outfile r3dvwb1045.1dc.com.cer
+
+
+**************************
+
+
+
+
+keytool -list -v -keystore ssl.truststore -storepass changeit
+keytool  -delete -alias  x1dpir999-int1 -keystore cacerts -storepass changeit
+keytool -importcert -keystore ssl.truststore -storepass changeit -file r3dvwb1045.txt -alias r3dvwb1045
+keytool -export -keystore ssl.keystore -alias "n3dvap024.1dc.com" -file n3dvap024.1dc.com.cer
