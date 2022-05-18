@@ -31,8 +31,9 @@ authenticate.
 ```
 
 az group list
-
+``` {.bash}
 \*Resource group\* - A container that holds related resources for an
 azure solution. The resource group can include all the resources for the
 solution, or only those resources that you want to manage as a
 group.\</programlisting\>
+```
