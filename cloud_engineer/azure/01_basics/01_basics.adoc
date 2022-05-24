@@ -33,10 +33,9 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
 *AZ Resource Group*
 ~~~~~~~~~~~~~~~~~~~~
 
-[source]
------------------
-*Resource group* 
-- A container that holds related resources for an azure solution. 
+[qanda]
+What is Azure Resource Group? ::
+Resource Group is a container that holds related resources for an azure solution. 
 The resource group can include all the resources for the solution, 
 or only those resources that you want to manage as a group.
 
