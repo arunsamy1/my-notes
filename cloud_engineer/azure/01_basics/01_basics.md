@@ -1,7 +1,7 @@
-Azure Command Line Interface {#_azure_command_line_interface}
+Azure Command Line Interface 
 ============================
 
-**Basic Commands** {#_emphasis_role_strong_basic_commands_emphasis}
+**Basic Commands** 
 ------------------
 
 ``` {.bash}
@@ -19,7 +19,7 @@ To sign in, use a web browser to open the page
 <https://microsoft.com/devicelogin> and enter the code XXXXXXXX to
 authenticate.
 
-**AZ Account Details** {#_emphasis_role_strong_az_account_details_emphasis}
+**AZ Account Details** 
 ----------------------
 
 ``` {.bash}
@@ -30,7 +30,7 @@ authenticate.
 * az account show --output table                - outputs as table format
 ```
 
-**AZ Resource Group** {#_emphasis_role_strong_az_resource_group_emphasis}
+**AZ Resource Group** 
 ---------------------
 
 **Q:** What is Azure Resource Group?
