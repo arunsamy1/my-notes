@@ -30,13 +30,8 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
 * az account show --output table		- outputs as table format
 -----------------
 
-[source,bash]
------------------
-
-az group list
------------------
-
-
+*AZ Resource Group*
+~~~~~~~~~~~~~~~~~~~~
 
 [source]
 -----------------
@@ -46,3 +41,13 @@ The resource group can include all the resources for the solution,
 or only those resources that you want to manage as a group.
 
 -----------------
+
+[source,bash]
+-----------------
+
+az group list
+-----------------
+
+
+
+
