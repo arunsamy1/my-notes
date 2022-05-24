@@ -40,12 +40,6 @@ The resource group can include all the resources for the solution,
 or only those resources that you want to manage as a group.
 -----------------
 
-.Resource Group
-[example]
-Resource Group is a container that holds related resources for an azure solution. 
-The resource group can include all the resources for the solution, 
-or only those resources that you want to manage as a group.
-
 [source,bash]
 -----------------
 
