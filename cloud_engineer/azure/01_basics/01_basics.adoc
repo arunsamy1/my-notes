@@ -6,7 +6,7 @@ Azure Command Line Interface
 
 [source,bash]
 -----------------
-* az --version		    - version of azure
+* az --version    - version of azure
 * az login            - which will open a browser window to login to azure.
 -----------------
 
