@@ -6,8 +6,8 @@ Azure Command Line Interface
 
 [source,bash]
 -----------------
-* az --version		  - version of azure
-* az login          - which will open a browser window to login to azure.
+* az --version		    - version of azure
+* az login            - which will open a browser window to login to azure.
 -----------------
 
 A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. 
