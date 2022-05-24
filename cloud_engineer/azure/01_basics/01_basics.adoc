@@ -30,8 +30,11 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
 * az account show --output table		- outputs as table format
 -----------------
 
+[source,bash]
+-----------------
 
 az group list
+-----------------
 
 
 
