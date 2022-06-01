@@ -1,0 +1,25 @@
+What are the tools available to operate the trust store and keystore files?
+Keytool & keytool command line
+Ikeyman & Ikeycmd
+
+Who provides the above tools?
+
+keytool - Keytool is a command-line utility that is popular in the Java community. This tool comes with JDK package
+ikeyman/ikeycmd	-  tool from IBM, which provides many of the features of 'keytool'. This tool is available within the IBM JDK package.
+
+When to use which type of keytool?
+It depends on the JDK you are using.
+If you are using Java JDK, use the keytool provided with it.
+If you are using IBM JDK, use ikeyman/ikeycmd provided with it
+
+
+What is JKS extension?
+Java Key Store
+
+Java uses its KeyStore class and related API to make use of a keystore (whether it's file based or not). JKS is a Java-specific file format, but the API can also be used with other file types, typically PKCS#12. When you want to load a keystore, you must specify its keystore type. The conventional extensions would be:
+
+.jks for type "JKS",
+.p12 or .pfx for type "PKCS12" (the specification name is PKCS#12, but the # is not used in the Java keystore type name).
+In addition, BouncyCastle also provides its implementations, in particular BKS (typically using the .bks extension), which is frequently used for Android applications.
+
+-------------
