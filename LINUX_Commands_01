@@ -1,0 +1,16 @@
+To use through scripts
+
+echo "Current date is $(date)"
+echo "Current date is $(PWD)"
+
+echo "processes running $(ps -ef | grep java)"
+
+echo "$(ps -ef | grep java)"
+echo "$(df -h)
+
+
+
+For loop
+
+For X in `find *.log -maxdepth 1 type f -mtime +5`; do ls -lrth $X; done
+
