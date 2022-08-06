@@ -29,11 +29,8 @@
     setfacl -m default:g::rwx -m o::rx log_folder/ 
     ---- giving read permission for the files inside the log folder g=RWX others=RX
 
-works only when we have a new folder setup
-take backup of entire folder
-create new folder
-apply the above acl
-start the instance to generate the logs --
+works only when we have a new folder setup.  Take backup of entire folder.  Create new folder. Apply the above acl. Start the instance to generate the logs --.
+
 ---------------------------------------------------------------------
 
 ## SSH setup for remote login
