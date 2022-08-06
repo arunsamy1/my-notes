@@ -34,7 +34,6 @@ take backup of entire folder
 create new folder
 apply the above acl
 start the instance to generate the logs --
-
 ---------------------------------------------------------------------
 
 ## SSH setup for remote login
