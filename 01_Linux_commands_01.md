@@ -52,10 +52,10 @@ Go to command prompt
 
 Run the below command
 
-net user user_account /domain
+    net user user_account /domain
 
 or
 
-net user /domain "user_account"
+    net user /domain "user_account"
 
 ---------------------------------------------------------------------
