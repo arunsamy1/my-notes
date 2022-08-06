@@ -23,9 +23,11 @@
     setfacl -m default:g::rwx -m o::rx log/
 
 
-    setfacl -m g::rwx -m o::rx log_folder ---- giving read write executable permission for the log folder g=RWX others=RX
+    setfacl -m g::rwx -m o::rx log_folder 
+    ---- giving read write executable permission for the log folder g=RWX others=RX
     
-    setfacl -m default:g::rwx -m o::rx log_folder/ ---- giving read permission for the files inside the log folder g=RWX others=RX
+    setfacl -m default:g::rwx -m o::rx log_folder/ 
+    ---- giving read permission for the files inside the log folder g=RWX others=RX
 
 works only when we have a new folder setup
 take backup of entire folder
