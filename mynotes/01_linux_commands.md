@@ -56,3 +56,7 @@ or
     net user /domain "user_account"
 
 ---------------------------------------------------------------------
+
+History list without timestamp and unique 
+
+history | sed 's/.[ ]*.[0-9]*.[ ]*//' | uniq
