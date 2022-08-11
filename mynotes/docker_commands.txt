@@ -1,0 +1,98 @@
+sudo apt-get remove docker docker-engine docker.io containerd runc
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo docker run hello-world
+sudo docker pull docker/whalesay
+sudo docker run docker/whalesay cowsay Hello-World!
+sudo docker stop jenkins/jenkins:lts
+sudo docker stop jenkins/jenkins
+sudo docker stop jenkins
+sudo docker image ls
+sudo docker stop 89276
+sudo docker stop jenkins/jenkins
+sudo docker pull docker pull rundeck/rundeck
+sudo docker pull  rundeck/rundeck
+sudo docker pull rundeck/rundeck
+sudo docker pull rundeck/rundeck:latest
+sudo docker pull rundeck/rundeck:4.4.0-20220714
+sudo docker image ls
+sudo docker run rundeck
+sudo docker run rundeck:4.4.0-20220714
+sudo docker run rundeck/rundeck
+sudo docker run rundeck/rundeck:4.4.0-20220714
+sudo docker run --name some-rundeck -p 4440:4440 -v data:/home/rundeck/server/data rundeck/rundeck:4.4.0-20220714
+sudo docker pull ansible/ansible
+sudo docker pull ansible/ansible:latest
+sudo docker pull ansible/ansible:ubuntu1404
+sudo docker pull jenkins
+sudo docker pull jenkins/jenkins:lts
+sudo docker ls
+sudo docker ps
+sudo docker list
+sudo docker help
+sudo docker image ls
+sudo docker run -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home jenkins
+sudo docker run -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home jenkins/jenkins:lts
+sudo docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins
+sudo docker ps
+sudo docker image ls
+sudo docker image rm docker/whalesay
+sudo docker image rm 6b362a9f73eb
+sudo docker ps -q
+sudo docker images
+sudo docker images -q
+sudo docker kill aecf75f2d5ee
+sudo docker rm aecf75f2d5ee
+sudo docker-compose
+sudo docker ps
+sudo docker kill $(docker ps -q)
+ps -ef | grep docker
+sudo apt-get install docker-compose-plugin
+sudo apt-cache docker-compose-plugin
+sudo docker compose version
+sudo docker-compose
+which docker-compose
+sudo docker pull jenkins/jenkins
+sudo docker info | grep -i root
+cd /var/lib/docker/
+sudo cd /var/lib/docker
+sudo docker version
+sudo docker ls
+sudo docker --help
+sudo docker image
+sudo docker image ls
+sudo docker image rm ansible/ansible
+sudo docker image rm ansible
+sudo docker image rmi ansible
+sudo docker image rmi ansible/ansible
+sudo docker image rmi 925ab82270f0
+sudo docker image ls
+sudo docker image rmi 6b362a9f73eb
+sudo docker image rmi feb5d9fea6a5
+sudo docker image rmi 89b279054578
+sudo docker image rmi aecf75f2d5ee
+sudo docker --help
+sudo docker container
+sudo docker container ls
+sudo docker container top
+sudo docker container stop
+sudo docker container inspect
+sudo docker container prune
+sudo docker container ls
+sudo docker container image ls
+sudo docker image ls
+sudo docker image rmi 6b362a9f73eb
+sudo docker image ls
+sudo docker image rmi feb5d9fea6a5
+sudo docker image ls
+sudo docker image rmi aecf75f2d5ee
+sudo docker image ls
+sudo docker image rmi 89b279054578
+sudo docker image ls
+sudo docker image rmi 33b793b26f25
+history | sed 's/.[ ]*.[0-9]*.[ ]*//' | uniq | grep docker
+history | sed 's/.[ ]*.[0-9]*.[ ]*//' | uniq | grep docker >> docker_commands.txt
