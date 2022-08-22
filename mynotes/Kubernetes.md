@@ -1,1 +1,7 @@
-< kubectl describe node <<insert-node-name-here>> >
+---------------------------------------------------------------------
+
+## **For loop**
+
+    < kubectl describe node <insert-node-name-here> >
+
+---------------------------------------------------------------------
