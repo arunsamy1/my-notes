@@ -2,6 +2,6 @@
 
 ## **Kubectl to view Node details**
 
-(( kubectl describe node <insert-node-name-here>  )) 
+(( kubectl describe node \<insert-node-name-here\>  )) 
 
 ---------------------------------------------------------------------
