@@ -28,6 +28,14 @@ ansible -i first_inventory.ini docs -m setup -a 'filter=ansible_distribution_ver
 
 ---
 
+
+ansible-playbook simple1.yaml -C 
+ansible-playbook simple1.yaml --syntax-check 
+
+
+
+---
+
 ### some playbooks basics ones.
 
 ---
@@ -67,6 +75,33 @@ ansible -i first_inventory.ini docs -m setup -a 'filter=ansible_distribution_ver
 ...
 
 ```
+
+---
+
+```
+tasks:
+- name: add a user
+   user:
+     name: bob
+     state: present
+
+```
+
+
+---
+
+```
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: add a user
+    user:
+      name: bob
+      state: absent
+
+```
+
 ---
 
 
