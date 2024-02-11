@@ -22,6 +22,7 @@ ansible -i first_inventory.ini docs -m setup | grep mem
 ansible -i first_inventory.ini docs -m setup | grep ansible_memtotal_mb
 
 ansible -i first_inventory.ini docs -m setup | grep distribution
+ansible -i first_inventory.ini docs -m setup -a 'filter=ansible_distribution_version'
 
 ```
 
