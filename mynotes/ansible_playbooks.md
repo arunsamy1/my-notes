@@ -46,5 +46,7 @@ ansible -i first_inventory.ini docs -m command -a "hostname"
 ansible -i first_inventory.ini docs -m command -a "uptime"  
 ansible -i first_inventory.ini docs -m command -a "w"  
 
+ansible -i first_inventory.ini -m ping docs  
+
 ---
 
