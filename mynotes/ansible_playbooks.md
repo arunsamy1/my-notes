@@ -40,8 +40,9 @@
 
 ### Some ad-hoc commands
 
-
+```bash
 ansible -i first_inventory.ini docs -m command -a "date"  
+```
 ansible -i first_inventory.ini docs -m command -a "hostname"  
 ansible -i first_inventory.ini docs -m command -a "uptime"  
 ansible -i first_inventory.ini docs -m command -a "w"  
