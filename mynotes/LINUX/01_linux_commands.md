@@ -46,10 +46,12 @@ works only when we have a new folder setup.  Take backup of entire folder.  Crea
 
 if the destination server is having /appserver, make sure you have the following permissions.
 
+```
 /appserver -755
 /appserver/.ssh - 700
 /appserver/.ssh/known_hosts -640
 /appserver/.ssh/authorized_keys - 640
+```
 
 ---------------------------------------------------------------------
 
