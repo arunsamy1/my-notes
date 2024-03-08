@@ -71,7 +71,22 @@ or
 
 History list without timestamp and unique 
 
+
+---
+
+
 history | sed 's/.[ ]*.[0-9]*.[ ]*//' | uniq
+
+---
+
+---
+#### openssl encryption & decryption of a file
+
+printf "&&&&&*****" | openssl dgst -sha3-512
+openssl enc -e -aes-256-cbc -in input_file.tar.gz -out input_file_aes256cbc_sha3-512.tar.gz
+
+mkdir test_temp; cd test_temp
+openssl enc -d -aes-256-cbc -in ../input_file_aes256cbc_sha3-512.tar.gz -out output_file.tar.gz
 
 ---
 
