@@ -1,0 +1,1413 @@
+RedHat EX200 : Practice Test
+
+Exam Code: EX200
+
+Title : Red Hat Certified System Administrator RHCSAQUESTION 1
+
+SIMULATION
+
+Configure a HTTP server, which can be accessed through http://station.domain40.example.com.
+
+Please download the released page from http://ip/dir/example.html.
+
+A. See explanation below.
+
+# yum install -y httpd
+
+# chkconfig httpd on
+
+# cd /var/www/html
+
+# wget http://ip/dir/example.html
+
+# cp example.com index.html
+
+# vim /etc/httpd/conf/httpd.conf
+
+NameVirtualHost 192.168.0.254:80
+
+<VirtualHost 192.168.0.254:80>
+
+DocumentRoot /var/www/html/
+
+ServerName station.domain40.example.com
+
+</VirtualHost>
+
+Correct Answer: A
+
+QUESTION 2
+
+SIMULATION
+
+Configure the verification mode of your host account and the password as LDAP. And it can login successfully
+
+through ldapuser40. The password is set as "password". And the certificate can be downloaded from http://ip/
+
+dir/ldap.crt. After the user logs on the user has no host directory unless you configure the autofs in the following
+
+questions.
+
+A. See explanation below.
+
+system-config-authentication
+
+LDAP Server: ldap//instructor.example.com (In domain form, not write IP)
+
+OR
+
+# yum groupinstall directory-client (1.krb5-workstation 2.pam-krb5 3.sssd)
+
+# system-config-authentication
+
+1.User Account Database: LDAP
+
+2.LDAP Search Base DN: dc=example,dc=com
+
+3.LDAP Server: ldap://instructor.example.com (In domain form, not write IP) 4.Download CA Certificate
+
+5.Authentication Method: LDAP password
+
+6.Apply
+
+getent passwd ldapuser40
+
+Correct Answer: A
+
+QUESTION 3
+
+SIMULATION
+
+Configure the system synchronous as 172.24.40.10.
+
+A. See explanation below.
+
+Graphical Interfaces:
+
+System-->Administration-->Date & Time
+
+OR# system-config-date
+
+Correct Answer: A
+
+QUESTION 4
+
+SIMULATION
+
+Change the logical volume capacity named vo from 190M to 300M. and the size of the floating range should
+
+set between 280 and 320. (This logical volume has been mounted in advance.)
+
+A. See explanation below.
+
+# vgdisplay
+
+(Check the capacity of vg, if the capacity is not enough, need to create pv , vgextend , lvextend) # lvdisplay
+
+(Check lv)
+
+# lvextend -L +110M /dev/vg2/lv2
+
+# resize2fs /dev/vg2/lv2
+
+mount -a
+
+(Verify)
+
+-------------------------------------------------------------------------------
+
+(Decrease lvm)
+
+# umount /media
+
+# fsck -f /dev/vg2/lv2
+
+# resize2fs -f /dev/vg2/lv2 100M
+
+# lvreduce -L 100M /dev/vg2/lv2
+
+# mount -a
+
+# lvdisplay (Verify)
+
+OR
+
+# e2fsck -f /dev/vg1/lvm02
+
+# resize2fs -f /dev/vg1/lvm02
+
+# mount /dev/vg1/lvm01 /mnt
+
+# lvreduce -L 1G -n /dev/vg1/lvm02
+
+# lvdisplay (Verify)
+
+Correct Answer: A
+
+QUESTION 5
+
+SIMULATION
+
+Create a volume group, and set 16M as a extends. And divided a volume group containing 50 extends on
+
+volume group lv, make it as ext4 file system, and mounted automatically under /mnt/data.
+
+A. See explanation below.
+
+# pvcreate /dev/sda7 /dev/sda8
+
+# vgcreate -s 16M vg1 /dev/sda7 /dev/sda8
+
+# lvcreate -l 50 -n lvm02
+
+# mkfs.ext4 /dev/vg1/lvm02
+
+# blkid /dev/vg1/lv1
+
+# vim /etc/fstab
+
+# mkdir -p /mnt/data
+
+UUID=xxxxxxxx /mnt/data ext4 defaults 0 0
+
+# vim /etc/fstab
+
+# mount -a
+
+# mount(Verify)
+
+Correct Answer: A
+
+QUESTION 6
+
+SIMULATION
+
+Download ftp://192.168.0.254/pub/boot.iso to /root, and mounted automatically under /media/cdrom and which
+
+take effect automatically at boot-start.
+
+A. See explanation below.
+
+# cd /root; wget ftp://192.168.0.254/pub/boot.iso
+
+# mkdir -p /media/cdrom
+
+# vim /etc/fstab
+
+/root/boot.iso /media/cdrom iso9660 defaults,loop 0 0
+
+# mount -a
+
+mount [-t vfstype] [-o options] device dir
+
+Correct Answer: A
+
+QUESTION 7
+
+SIMULATION
+
+Add user: user1, set uid=601
+
+Password: redhat
+
+The user's login shell should be non-interactive.
+
+A. See explanation below.
+
+# useradd -u 601 -s /sbin/nologin user1
+
+# passwd user1
+
+redhat
+
+Correct Answer: A
+
+QUESTION 8
+
+SIMULATION
+
+Add users: user2, user3.
+
+The Additional group of the two users: user2, user3 is the admin group Password: redhat
+
+A. See explanation below.
+
+# useradd -G admin user2
+
+# useradd -G admin user3
+
+# passwd user2
+
+redhat
+
+# passwd user3
+
+redhat
+
+Correct Answer: A
+
+QUESTION 9
+
+SIMULATION
+
+Copy /etc/fstab to /var/tmp name admin, the user1 could read, write and modify it, while user2 without any
+
+permission.
+
+A. See explanation below.# cp /etc/fstab /var/tmp/
+
+# chgrp admin /var/tmp/fstab
+
+# setfacl -m u:user1:rwx /var/tmp/fstab
+
+# setfacl -m u:user2:--- /var/tmp/fstab
+
+# ls -l
+
+-rw-rw-r--+ 1 root admin 685 Nov 10 15:29 /var/tmp/fstab
+
+Correct Answer: A
+
+QUESTION 10
+
+SIMULATION
+
+Configure a task: plan to run echo "file" command at 14:23 every day.
+
+A. See explanation below.
+
+(a) Created as administrator
+
+# crontab -u natasha -e
+
+23 14 * * * /bin/echo "file"
+
+(b)Created as natasha
+
+# su - natasha
+
+$ crontab -e
+
+23 14 * * * /bin/echo "file"
+
+Correct Answer: A
+
+QUESTION 11
+
+SIMULATION
+
+Adjust the size of the Logical Volume.
+
+Adjust the size of the vo Logical Volume, its file system size should be 290M. Make sure that the content of this
+
+system is complete.
+
+Note: the partition size is rarely accurate to the same size as required, so in the range 270M to 320M is
+
+acceptable.
+
+A. See explanation below.
+
+Addition
+
+df -hT
+
+lvextend -L +100M /dev/vg0/vo
+
+Lvscan
+
+xfs_growfs /home/ //home is the mounted directory of the LVM, this step just need to do in the practice
+
+environment, and test EXT4 does not need this step.
+
+resize2fs /dev/vg0/vo// use this command to update in examination.
+
+df -hT
+
+OR
+
+Subtraction
+
+e2fsck -f/dev/vg0/vo
+
+umount /home
+
+resize2fs /dev/vg0/vo // the final required partition capacity is 100M lvreduce -l 100M /dev/vg0/vo mount /
+
+dev/vg0/vo/home
+
+df -hT
+
+Correct Answer: A
+
+QUESTION 12SIMULATION
+
+Binding to an external validation server.
+
+System server.domain11.example.com provides a LDAP validation service, your system should bind to this
+
+service as required:
+
+Base DN of validation service is dc=example,dc=com
+
+LDAP is used for providing account information and validation information Connecting and using the
+
+certification of http://server.domain11.example.com/pub/ EXAMPLE-CA-CERT to encrypt
+
+After the correct configuration, ldapuser1 can log into your system, it does not have HOME directory until you
+
+finish autofs questions, ldapuser1 password is password.
+
+A. See explanation below.
+
+yum -y install sssd authconfig-gtk krb5-workstation authconfig-gtk // open the graphical interface
+
+Modify user account database to ldap, fill up DN and LDAP SERVER as questions required, use TLS to
+
+encrypt connections making tick, write http:// server.domain11.example.com/pub/EXAMPLE-CA-CERT to
+
+download ca, authentication method choose ldap password.
+
+You can test if the ldapuser is added by the following command:
+
+Id ldapuser1
+
+Note: user password doesn't not need to set
+
+Correct Answer: A
+
+QUESTION 13
+
+SIMULATION
+
+Configure NTP.
+
+Configure NTP service, Synchronize the server time, NTP server: classroom.example.com
+
+A. See explanation below.
+
+Configure the client:
+
+Yum -y install chrony
+
+Vim /etc/chrony.conf
+
+Add: server classroom.example.com iburst
+
+Start: systemctl enable chronyd
+
+systemctl restart chronyd
+
+Validate: timedatectl status
+
+Correct Answer: A
+
+QUESTION 14
+
+SIMULATION
+
+Configure autofs.
+
+Configure the autofs automatically mount to the home directory of LDAP, as required:
+
+server.domain11.example.com use NFS to share the home to your system. This file system contains a pre
+
+configured home directory of user ldapuserX.
+
+Home directory of ldapuserX is:
+
+server.domain11.example.com /home/guests/ldapuser
+
+Home directory of ldapuserX should automatically mount to the ldapuserX of the local /home/guests Homedirectory's write permissions must be available for users ldapuser1's password is password
+
+A. See explanation below.
+
+yum install -y autofs
+
+mkdir /home/rehome
+
+/etc/auto.master
+
+/home/rehome/etc/auto.ldap
+
+Keep then exit
+
+cp /etc/auto.misc /etc/auto.ldap
+
+/etc/auto.ldap
+
+ldapuserX -fstype=nfs,rw server.domain11.example.com:/home/guests/
+
+Keep then exit
+
+systemctl start autofs
+
+systemctl enable autofs
+
+su - ldapuserX// test
+
+If the above solutions cannot create files or the command prompt is -bash-4.2$, it maybe exist multi-level
+
+directory, this needs to change the server.domain11.example.com:/home/guests/ to
+
+server.domain11.example.com:/home/guests/ldapuserX. What is multi-level directory? It means there is a
+
+directory of ldapuserX under the /home/guests/ldapuserX in the questions. This directory is the real
+
+directory.
+
+Correct Answer: A
+
+QUESTION 15
+
+SIMULATION
+
+Configure a user account.
+
+Create a user iar uid is 3400. Password is redhat
+
+A. See explanation below.
+
+useradd -u 3400 iar
+
+passwd iar
+
+Correct Answer: A
+
+QUESTION 16
+
+SIMULATION
+
+Search files.
+
+Find out files owned by jack, and copy them to directory /root/findresults
+
+A. See explanation below.
+
+mkdir/root/findfiles
+
+find / -user jack -exec cp -a {} /root/findfiles/ \; ls /root/findresults
+
+Correct Answer: A
+
+QUESTION 17
+
+SIMULATION
+
+Search a StringFind out all the columns that contains the string seismic within /usr/share/dict/words, then copy all these
+
+columns to /root/lines.tx in original order, there is no blank line, all columns must be the accurate copy of the
+
+original columns.
+
+A. See explanation below.
+
+grep seismic /usr/share/dict/words > /root/lines.txt
+
+Correct Answer: A
+
+QUESTION 18
+
+SIMULATION
+
+Create a backup
+
+Create a backup file named /root/backup.tar.bz2, contains the content of /usr/local, tar must use bzip2 to
+
+compress.
+
+A. See explanation below.
+
+cd /usr/local
+
+tar jcvf /root/backup.tar.bz2
+
+mkdir /test
+
+tar jxvf /root/backup.tar.bz2 C /test// Decompression to check the content is the same as the /usr/loca after
+
+If the questions require to use gzip to compress. change j to z.
+
+Correct Answer: A
+
+QUESTION 19
+
+SIMULATION
+
+Configure your Host Name, IP Address, Gateway and DNS.
+
+Host name: dtop5.dn.ws.com
+
+IP Address: 172.28.10.5/4
+
+Gateway: 172.28.10.1
+
+DNS: 172.28.10.1
+
+A. See explanation below.
+
+1. Configure Host Name
+
+vim /etc/sysconfig/network NETWORKING=yes HOSTNAME=dtop5.dn.ws.com GATEWAY=172.28.10.1
+
+2. Configure IP Address, Gateway and DNS
+
+Configure the network by Network Manager:Note: Please remember to choose two options:
+
+Connect automatically
+
+Available to all users
+
+Click "Apply", save and exit, and restart your network services:
+
+# Service network restart
+
+3. Validate these profiles:
+
+a) Check gateway: # vim / etc / sysconfig / network
+
+NETWORKING=yes
+
+HOSTNAME=dtop5.dn.ws.com
+
+GATEWAY=172.28.10.1
+
+b) Check Host Name: # vim /etc/hosts
+
+c) Check DNS: # vim /etc/resolv.conf
+
+# Generated by NetworkManagerSearch dn.ws.com
+
+Nameserver 172.28.10.1
+
+d) Check Gateway: # vim /etc/sysconfig/network-scripts/ifcfg-eth0
+
+Correct Answer: A
+
+QUESTION 20
+
+SIMULATION
+
+Create a 2G swap partition which take effect automatically at boot-start, and it should not affect the original
+
+swap partition.
+
+A. See explanation below.
+
+# fdisk /dev/sda
+
+p
+
+(check Partition table)
+
+n
+
+(create new partition: press e to create extended partition, press p to create the main partition, and the
+
+extended partition is further divided into logical partitions) Enter
+
++2G t
+
+8I
+
+W
+
+partx -a /dev/sda
+
+partprobe
+
+mkswap /dev/sda8
+
+Copy UUID
+
+swapon -a
+
+vim /etc/fstab
+
+UUID=XXXXX swap swap defaults 0 0
+
+(swapon -s)Correct Answer: A
+
+QUESTION 21
+
+SIMULATION
+
+There are two different networks, 192.168.0.0/24 and 192.168.1.0/24. Your System is in 192.168.0.0/24
+
+Network. One RHEL6 Installed System is going to use as a Router. All required configuration is already done
+
+on Linux Server. Where 192.168.0.254 and 192.168.1.254 IP Address are assigned on that Server. How will
+
+make successfully ping to 192.168.1.0/24 Network's Host?
+
+A. See explanation below.
+
+vi /etc/sysconfig/network GATEWAY=192.168.0.254
+
+OR
+
+vi /etc/sysconf/network-scripts/ifcfg-eth0 DEVICE=eth0
+
+BOOTPROTO=static
+
+ONBOOT=yes
+
+IPADDR=192.168.0.?
+
+NETMASK=255.255.255.0
+
+GATEWAY=192.168.0.254
+
+service network restart
+
+Gateway defines the way to exit the packets. According to question System working as a router for two
+
+networks have IP Address 192.168.0.254 and 192.168.1.254.
+
+Correct Answer: A
+
+QUESTION 22
+
+SIMULATION
+
+Make a swap partition having 100MB. Make Automatically Usable at System Boot Time.
+
+A. See explanation below.
+
+Use fdisk /dev/hda ->To create new partition.
+
+Type n-> For New partition
+
+It will ask for Logical or Primary Partitions. Press l for logical.
+
+It will ask for the Starting Cylinder: Use the Default by pressing Enter Key.
+
+Type the Size: +100M ->You can Specify either Last cylinder of Size here.
+
+Press P to verify the partitions lists and remember the partitions name. Default System ID is 83 that means
+
+Linux Native.
+
+Type t to change the System ID of partition.
+
+Type Partition Number
+
+Type 82 that means Linux Swap.
+
+Press w to write on partitions table.
+
+Either Reboot or use partprobe command.
+
+mkswap /dev/hda? ->To create Swap File system on partition.
+
+swapon /dev/hda? ->To enable the Swap space from partition.
+
+free -m ->Verify Either Swap is enabled or not.
+
+vi /etc/fstab/dev/hda? swap swap defaults 0 0
+
+Reboot the System and verify that swap is automatically enabled or not.
+
+Correct Answer: A
+
+QUESTION 23
+
+SIMULATION
+
+There are two different networks 192.168.0.0/24 and 192.168.1.0/24. Where 192.168.0.254 and 192.168.1.254
+
+IP Address are assigned on Server. Verify your network settings by pinging 192.168.1.0/24 Network's Host.A. See explanation below.
+
+vi /etc/sysconfing/network NETWORKING=yes HOSTNAME=station?.example.com
+
+GATEWAY=192.168.0.254 service network restart
+
+2.vi /etc/sysconfig/network-scripts/ifcfg-eth0 DEVICE=eth0
+
+ONBOOT=yes
+
+BOOTPROTO=static
+
+IPADDR=X.X.X.X
+
+NETMASK=X.X.X.X
+
+GATEWAY=192.168.0.254
+
+ifdown eth0
+
+ifup eth0
+
+Correct Answer: A
+
+QUESTION 24
+
+SIMULATION
+
+One Logical Volume is created named as myvol under vo volume group and is mounted. The Initial Size of that
+
+Logical Volume is 400MB. Make successfully that the size of Logical Volume 200MB without losing any data.
+
+The size of logical volume 200MB to 210MB will be acceptable.
+
+A. See explanation below.
+
+First check the size of Logical Volume: lvdisplay /dev/vo/myvol
+
+Make sure that the filesystem is in a consistent state before reducing:
+
+# fsck -f /dev/vo/myvol
+
+Now reduce the filesystem by 200MB.
+
+# resize2fs /dev/vo/myvol 200M
+
+It is now possible to reduce the logical volume. #lvreduce /dev/vo/myvol -L 200M
+
+Verify the Size of Logical Volume: lvdisplay /dev/vo/myvol
+
+Verify that the size comes in online or not: df -h
+
+Correct Answer: A
+
+QUESTION 25
+
+SIMULATION
+
+We are working on /data initially the size is 2GB. The /dev/test0/lvtestvolume is mount on /data. Now you
+
+required more space on /data but you already added all disks belong to physical volume. You saw that you
+
+have unallocated space around 5 GB on your harddisk. Increase the size of lvtestvolume by 5GB.
+
+A. See explanation below.
+
+Create a partition having size 5 GB and change the syste id '8e'.
+
+use partprobe command
+
+pvcreate /dev/hda9 Suppose your partition number is hda9.
+
+vgextend test0 /dev/hda9 vgextend command add the physical disk on volume group.
+
+lvextend -L+5120M /dev/test0/lvtestvolume
+
+verify using lvdisplay /dev/test0/lvtestvolume.
+
+Correct Answer: A
+
+QUESTION 26
+
+SIMULATION
+
+One Domain RHCE is configured in your lab, your domain server is server1.example.com. nisuser2001,
+
+nisuser2002, nisuser2003 user are created on your server 192.168.0.254:/rhome/stationx/nisuser2001. Make
+
+sure that when NIS user login in your system automatically mount the home directory. Home directory is
+
+separately shared on server /rhome/stationx/ where x is your Station number.A. See explanation below.
+
+use the authconfig --nisserver=<NIS SERVER> --nisdomain=<NIS DOMAIN> -- update
+
+Example: authconfig --niserver=192.168.0.254 --nisdomain=RHCE --update or system-config-
+
+authentication Click on Enable NIS
+
+Type the NIS Domain: RHCE
+
+Type Server 192.168.0.254 then click on next and ok
+
+You will get a ok message.
+
+Create a Directory /rhome/stationx where x is your station number.
+
+vi /etc/auto.master and write at the end of file /rhome/stationx /etc/auto.home --timeout=60
+
+vi /etc/auto.home and write
+
+* -rw,soft,intr 192.168.0.254:/rhome/stationx/&
+
+Note: please specify your station number in the place of x.
+
+Service autofs restart
+
+Login as the nisuser2001 or nisuser2002 on another terminal will be Success. According to question,
+
+RHCE domain is already configured. We have to make a client of RHCE domain and automatically mount
+
+the home directory on your system. To make a member of domain, we use the authconfig with option or
+
+system- config authentication command. There a are lots of authentication server i.e NIS, LDAB, SMB etc.
+
+NIS is a RPC related Services, no need to configure the DNS, we should specify the NIS server address.
+
+Here Automount feature is available. When user tried to login, home directory will automatically mount. The
+
+automount service used the /etc/auto.master file. On
+
+/etc/auto.master file we specified the mount point the configuration file for mount point.
+
+Correct Answer: A
+
+QUESTION 27
+
+SIMULATION
+
+Make on data that only the user owner and group owner member can fully access.
+
+A. See explanation below.
+
+chmod 770 /data
+
+Verify using : ls -ld /data Preview should be like:
+
+drwxrwx--- 2 root sysadmin 4096 Mar 16 18:08 /data
+
+To change the permission on directory we use the chmod command.
+
+According to the question that only the owner user (root) and group member (sysadmin) can fully access
+
+the directory so: chmod 770 /data
+
+Correct Answer: A
+
+QUESTION 28
+
+SIMULATION
+
+Who ever creates the files/directories on a data group owner should automatically be in the same group owner
+
+as data.
+
+A. See explanation below.
+
+1. chmod g+s /data
+
+2. Verify using: ls -ld /data
+
+Permission should be like this: drwxrws--- 2 root sysadmin 4096 Mar 16 18:08 /data
+
+If SGID bit is set on directory then who every users creates the files on directory group owner automatically
+
+the owner of parent directory. To set the SGID bit:
+
+chmod g+s directory To Remove the SGID bit: chmod g-s directory
+
+Correct Answer: AQUESTION 29
+
+SIMULATION
+
+Your System is going to use as a Router for two networks. One Network is 192.168.0.0/24 and Another
+
+Network is 192.168.1.0/24. Both network's IP address has assigned. How will you forward the packets from
+
+one network to another network?
+
+A. See explanation below.
+
+echo "1" >/proc/sys/net/ipv4/ip_forward
+
+vi /etc/sysctl.conf
+
+net.ipv4.ip_forward = 1
+
+If you want to use the Linux System as a Router to make communication between different networks, you
+
+need enable the IP forwarding. To enable on running session just set value 1 to
+
+/proc/sys/net/ipv4/ip_forward. As well as automatically turn on the IP forwarding features on next boot set
+
+on /etc/sysctl.conf file.
+
+Correct Answer: A
+
+QUESTION 30
+
+SIMULATION
+
+You are a System administrator. Using Log files very easy to monitor the system. Now there are 50 servers
+
+running as Mail, Web, Proxy, DNS services etc. You want to centralize the logs from all servers into on LOG
+
+Server. How will you configure the LOG Server to accept logs from remote host?
+
+A. See explanation below.
+
+By default, system accept the logs only generated from local host. To accept the Log from other host
+
+configure:
+
+vi /etc/sysconfig/syslog SYSLOGD_OPTIONS="-m 0 -r"
+
+Where
+
+-m 0 disables 'MARK' messages.
+
+-r enables logging from remote machines
+
+-x disables DNS lookups on messages received with -r
+
+service syslog restart
+
+Correct Answer: A
+
+QUESTION 31
+
+SIMULATION
+
+One Package named zsh is dump on ftp://server1.example.com under /pub/updates directory and your FTP
+
+server is 192.168.0.254. Install the package zsh.
+
+A. See explanation below.
+
+rpm -ivh ftp://server1/example.com/pub/updates/zsh-*
+
+or
+
+Login to ftp server : ftp ftp://server1.example.com using anonymous user.
+
+Change the directory: cd pub and cd updates
+
+Download the package: mget zsh-*
+
+Quit from the ftp prompt : bye
+
+Install the package
+
+rpm -ivh zsh-*
+
+Verify either package is installed or not : rpm -q zsh
+
+Correct Answer: AQUESTION 32
+
+SIMULATION
+
+Some users home directory is shared from your system. Using showmount -e localhost command, the shared
+
+directory is not shown. Make access the shared users home directory.
+
+A. See explanation below.
+
+Verify the File whether Shared or not ? : cat /etc/exports
+
+Start the nfs service: service nfs start
+
+Start the portmap service: service portmap start
+
+Make automatically start the nfs service on next reboot: chkconfig nfs on
+
+Make automatically start the portmap service on next reboot: chkconfig portmap on
+
+Verify either sharing or not: showmount -e localhost
+
+Check that default firewall is running on system?
+
+If running flush the iptables using iptables -F and stop the iptables service.
+
+Correct Answer: A
+
+QUESTION 33
+
+SIMULATION
+
+Add a new logical partition having size 100MB and create the data which will be the mount point for the new
+
+partition.
+
+A. See explanation below.
+
+1. Use fdisk /dev/hda-> To create new partition.
+
+2. Type n ->For New partitions
+
+3. It will ask for Logical or Primary Partitions. Press l for logical.
+
+4. It will ask for the Starting Cylinder: Use the Default by pressing Enter
+
+Keys
+
+5. Type the size: +100M you can specify either Last cylinder of size here.
+
+6. Press P to verify the partitions lists and remember the partitions name.
+
+7. Press w to write on partitions table.
+
+8. Either Reboot or use partprobe command.
+
+9. Use mkfs -t ext3 /dev/hda?
+
+OR
+
+1. mke2fs -j /dev/hda? ->To create ext3 filesystem.
+
+2. vi /etc/fstab
+
+3. Write:
+
+/dev/hda? /data ext3 defaults 0 0
+
+4. Verify by mounting on current sessions also:
+
+mount /dev/hda? /data
+
+Correct Answer: A
+
+QUESTION 34
+
+SIMULATION
+
+There is a server having 172.24.254.254 and 172.25.254.254. Your System lies on 172.24.0.0/16. Make
+
+successfully ping to 172.25.254.254 by Assigning following
+
+IP: 172.24.0.x where x is your station number.
+
+A. See explanation below.
+
+Use netconfig command
+
+Enter the IP Address as given station number by your examiner: example: 172.24.0.1
+
+Enter Subnet MaskEnter Default Gateway and primary name server
+
+press on ok
+
+ifdown eth0
+
+ifup eth0
+
+verify using ifconfig
+
+In the lab server is playing the role of router, IP forwarding is enabled. Just set the Correct IP and gateway,
+
+you can ping to 172.25.254.254.
+
+Correct Answer: A
+
+QUESTION 35
+
+SIMULATION
+
+Successfully resolve to server1.example.com where your DNS server is 172.24.254.254.
+
+A. See explanation below.
+
+vi /etc/resolv.conf
+
+nameserver 172.24.254.254
+
+host server1.example.com
+
+On every clients, DNS server is specified in /etc/resolv.conf. When you request by name it tries to resolv
+
+from DNS server.
+
+Correct Answer: A
+
+QUESTION 36
+
+SIMULATION
+
+Your System is going use as a router for 172.24.0.0/16 and 172.25.0.0/16. Enable the IP Forwarding.
+
+1. echo "1" >/proc/sys/net/ipv4/ip_forward
+
+2. vi /etc/sysctl.conf net.ipv4.ip_forward=1
+
+A. See explanation below.
+
+/proc is the virtual filesystem, containing the information about the running kernel.
+
+To change the parameter of running kernel you should modify on /proc. From Next reboot the system,
+
+kernel will take the value from /etc/sysctl.conf.
+
+Correct Answer: A
+
+QUESTION 37
+
+SIMULATION
+
+In the system, mounted the iso image /root/examine.iso to/mnt/iso directory. And enable automatically mount
+
+(permanent mount) after restart system.
+
+A. See explanation below.
+
+/etc/fstab:
+
+/root/examine.iso /mnt/iso iso9660 loop 0 0 mount -a
+
+mount | grep examine
+
+Correct Answer: A
+
+QUESTION 38
+
+SIMULATION
+
+1. Find all sizes of 10k file or directory under the /etc directory, and copy to /tmp/findfiles directory.
+
+2. Find all the files or directories with Lucy as the owner, and copy to /tmp/findfiles directory.A. See explanation below.
+
+(1)find /etc -size 10k -exec cp {} /tmp/findfiles \;
+
+(2)find / -user lucy -exec cp -a {} /tmp/findfiles \;
+
+Note: If find users and permissions, you need to use cp - a options, to keep file permissions and user
+
+attributes etc.
+
+Correct Answer: A
+
+QUESTION 39
+
+SIMULATION
+
+There is a local logical volumes in your system, named with common and belong to VGSRV volume group,
+
+mount to the /common directory. The definition of size is 128 MB.
+
+Requirement:
+
+Extend the logical volume to 190 MB without any loss of data. The size is allowed between 160-160 MB after
+
+extending.
+
+A. See explanation below.
+
+lvextend -L 190M /dev/mapper/vgsrv-common resize2fs /dev/mapper/vgsrv-common
+
+Correct Answer: A
+
+QUESTION 40
+
+SIMULATION
+
+Create a swap space, set the size is 600 MB, and make it be mounted automatically after rebooting the system
+
+(permanent mount).
+
+A. See explanation below.
+
+if=/dev/zero of=/swapfile bs=1M count=600 mkswap /swapfile
+
+/etc/fstab:
+
+/swapfile swap swap defaults 0 0 mount -a
+
+Correct Answer: A
+
+QUESTION 41
+
+SIMULATION
+
+According the following requirements to create user, user group and the group members:
+
+- A group named admin.
+
+- A user named mary, and belong to admin as the secondary group.
+
+- A user named alice, and belong to admin as the secondary group.
+
+- A user named bobby, bobby's login shell should be non-interactive. Bobby not belong to admin as the
+
+secondary group.
+
+Mary, Alice, bobby users must be set "password" as the user's password.
+
+A. See explanation below.
+
+groupadd admin
+
+useradd -G admin mary
+
+useradd -G admin alice
+
+useradd -s /sbin/nologin bobby
+
+echo "password" | passwd --stdin mary
+
+echo "password" | passwd --stdin alice
+
+echo "password" | passwd --stdin bobby
+
+Correct Answer: A
+
+QUESTION 42SIMULATION
+
+According the following requirements to create a local directory /common/admin.
+
+This directory has admin group.
+
+This directory has read, write and execute permissions for all admin group members.
+
+Other groups and users don't have any permissions.
+
+All the documents or directories created in the/common/admin are automatically inherit the admin group.
+
+A. See explanation below.
+
+mkdir -p /common/admin
+
+chgrp admin /common/admin
+
+chmod 2770 /common/admin
+
+Correct Answer: A
+
+QUESTION 43
+
+SIMULATION
+
+Configure the FTP service in your system, allow remote access to anonymous login and download the program
+
+by this service. Service is still running after system rebooting.
+
+A. See explanation below.
+
+yum install vsftpd
+
+/etc/init.d/vsftpd start
+
+chkconfig vsftpd on
+
+Correct Answer: A
+
+QUESTION 44
+
+SIMULATION
+
+Configure your web services, download from http://instructor.example.com/pub/serverX.html And the services
+
+must be still running after system rebooting.
+
+A. See explanation below.
+
+cd /var/www/html
+
+wget http://instructor.example.com/pub/serverX.html mv serverX.html index.html /etc/init.d/httpd restart
+
+chkconfig httpd on
+
+Correct Answer: A
+
+QUESTION 45
+
+SIMULATION
+
+Create a volume group, and set the size is 500M, the size of single PE is 16M. Create logical volume named
+
+lv0 in this volume group, set size is 20 PE, make it as ext3 file system, and mounted automatically under data.
+
+A. See explanation below.
+
+fdisk /dev/vda
+
+pvcreate /dev/vda3
+
+vgcreate s 16M vg0 /dev/vda3
+
+lvcreate n lv0 l 20 vg0
+
+mkfs.ext3 /dev/mapper/vg0-lv0
+
+mkdir /data
+
+/etc/fstab:
+
+/dev/mapper/vg0-lv0 /data ext3 defaults 0 0
+
+mount amount | grep data
+
+Correct Answer: A
+
+QUESTION 46
+
+SIMULATION
+
+Resize the logical volume vo and its filesystem to 290 MB. Make sure that the filesystem contents remain
+
+intact.
+
+Note: Partitions are seldom exactly the same size requested, so a size within the range of 260 MB to 320 MiB
+
+is acceptable.
+
+A. See explanation below.
+
+df -hT
+
+lvextend -L +100M /dev/vg0/vo
+
+lvscan
+
+xfs_growfs /home/ // home is LVM mounted directory
+
+Note: This step is only need to do in our practice environment, you do not need to do in the real exam
+
+resize2fs /dev/vg0/vo // Use this comand to update in the real exam df -hT
+
+OR
+
+e2fsck -f/dev/vg0/vo
+
+umount /home
+
+resize2fs /dev/vg0/vo required partition capacity such as 100M lvreduce -l 100M /dev/vg0/vo mount /dev/
+
+vg0/vo /home
+
+df Ht
+
+Correct Answer: A
+
+QUESTION 47
+
+SIMULATION
+
+Create the following users, groups, and group memberships:
+
+A group named adminuser.
+
+A user natasha who belongs to adminuser as a secondary group A user harry who also belongs to adminuser
+
+as a secondary group. A user sarah who does not have access to an interactive shell on the system, and who
+
+is not a member of adminuser, natasha, harry, and sarah should all have the password of redhat.
+
+A. See explanation below.
+
+groupadd sysmgrs
+
+useradd -G sysmgrs Natasha
+
+We can verify the newly created user by cat /etc/passwd)
+
+# useradd -G sysmgrs harry
+
+# useradd -s /sbin/nologin sarrh
+
+# passwd Natasha
+
+# passwd harry
+
+# passwd sarrah
+
+Correct Answer: A
+
+QUESTION 48
+
+SIMULATIONSet cronjob for user natasha to do /bin/echo hiya at 14:23.
+
+A. See explanation below.
+
+# crontab -e -u natasha
+
+23 14 * * * /bin/echo hiya
+
+:wq!
+
+Correct Answer: A
